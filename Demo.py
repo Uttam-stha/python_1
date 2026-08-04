@@ -1,7 +1,8 @@
-name = "Uttam"
-age = 25
-height = 5.9
-is_student = True
+from fastapi import Depends
 
-print(name)
-print(is_student)
+def common_parameters(q: str = None,limit: int = 10 ):
+    return {"q": q, "limit": limit}
+
+@app.get("/search/")
+def search(params: dict = Depends(common_parameters)):
+    return {"params": params}
